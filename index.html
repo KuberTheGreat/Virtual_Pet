@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang = "en" dir = "ltr">
   <head>
-    <meta charset="utf-8">
-      <title>Virtual Pet-1</title>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
-      <script src="p5.play.js"></script>
-
+    <meta charset = "utf-8">
+      <title> Virtual Pet-1 </title>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+      <script src = "p5.play.js"></script>
+      <script src = "js/Food.js"></script>
       
       <!--Your web app's Firebase configuration
          Add here
         Initialize Firebase-->
 
-      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <link rel = "stylesheet" type = "text/css" href = "style.css"/>
     </head>
     <body>
       <!-- The core Firebase JS SDK is always required and must be listed first -->
-      <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+      <script src = "https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+      <script src = "https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
 
       <!-- TODO: Add SDKs for Firebase products that you want to use
           https://firebase.google.com/docs/web/setup#available-libraries -->
-      <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+      <script src = "https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
 
       <script>
         // Your web app's Firebase configuration
@@ -30,17 +30,17 @@
         var firebaseConfig = {
           apiKey: "AIzaSyDfUrX-au9p6kPB3utqPMpEV4OjlBv3m8Q",
           authDomain: "visual-pet-eb744.firebaseapp.com",
+          databaseURL: "https://visual-pet-eb744-default-rtdb.firebaseio.com",
           projectId: "visual-pet-eb744",
           storageBucket: "visual-pet-eb744.appspot.com",
           messagingSenderId: "756206058566",
-          appId: "1:756206058566:web:ed731a1b33e54d943cde47",
-          measurementId: "G-ZF3DJFN3LT"
+          appId: "1:756206058566:web:9b05894fd9a8e0873cde47",
+          measurementId: "G-0W58M21GXT"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
       </script>
 
-      <script src="sketch.js"></script>
+      <script src = "sketch.js"></script>
     </body>
   </html>
