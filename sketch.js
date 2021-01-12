@@ -4,6 +4,8 @@ var dog, dog_image, dog_happy;
 // variable for the database 
 var database;
 
+var readState;
+
 // variable for the stock of the food
 var foodStock;
 
@@ -16,10 +18,23 @@ var foodObj;
 var feedButton;
 var addButton;
 
+// section for the 3 spots
+var bedroom, garden, washroom;
+
+var currentTime;
+
+var feedTime, lastFed;
+
+var gameState = "Hungry";
+
 // function to load images of the dog
 function preload(){
 	dog_image = loadImage("images/Dog.png");
-	dog_happy = loadImage("images/happydog.png");
+	dog_happy = loadImage("images/happy dog.png");
+
+	bedroom = loadImage("images/Bed Room.png");
+	garden = loadImage("images/Garden.png");
+	washroom = loadImage("images/Wash Room.png");
 }
 
 function setup() {
@@ -56,6 +71,16 @@ function setup() {
 	database.ref('/').update({
 		Food:foodS
 	}) 
+
+	// reads the game state and sets the background accordingly
+	readState = database.ref('gameState');
+	readState.on("value", function(data){
+		gameState = data.val();
+	})
+
+	// nothing worked so set a random number generator for the last feed
+	// so changes the background accordingly
+	lastFed = Math.round(random(1, 24));
 }
 
 function draw() {  
@@ -68,18 +93,57 @@ function draw() {
 		dog.changeAnimation("simple_dog", dog_image);
 	}
 	
-	// displayes the milk bottles
-	foodObj.display();
-	
+	// sets the variable currentTime to realtime hour in 24 hour format
+	currentTime = hour();
+
+	// changing the background
+	// according to your hints
+	if(currentTime === (lastFed + 1)){
+		update("Playing");
+		foodObj.garden();
+	}
+	else if(currentTime === (lastFed + 2)){
+		update("Sleeping");
+		foodObj.bedroom();
+	}
+	else if(currentTime > (lastFed + 2) && currentTime <= (lastFed + 4)){
+		update("Bathing");
+		foodObj.washroom();
+	}
+	else{
+		update("Hungry");
+		foodObj.display();
+	}
+
+	// removes the button if the gamestate is anything b
+	if(gameState !== "Hungry"){
+		feedButton.hide();
+		addButton.hide();
+		dog.remove();
+	}
+	else{
+		feedButton.show();
+		addButton.show();
+		dog.changeAnimation("simple_dog", dog_image);
+		feedDog;
+	}
+
 	drawSprites();
 
 	// text properties which i wont forget ever
 	textSize(20);
 	noStroke();
 	fill(51);
-	text("Feed Lala Milk!", 200, 30);
+	text("Feed Lala Milk!", 180, 30);
 
 	text("Milk bottle remaining: " + foodS, 150, 100);
+
+	if(lastFed <= 12){
+		text("Last Fed: " + lastFed + "AM", 200, 130);
+	}
+	else{
+		text("Last Fed: " + lastFed + "PM", 200, 130);
+	}
 }
 
 // function to read the stocks at the database
@@ -136,5 +200,11 @@ function addFood(){
 	// updates the database
 	database.ref('/').update({
 		Food:foodS
+	})
+}
+
+function update(state){
+	database.ref('/').update({
+		gameState:state
 	})
 }
