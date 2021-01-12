@@ -45,4 +45,17 @@ class Food{
             foodStock:stock
         })
     }
+
+    // methods to add the background
+    bedroom(){
+        background(bedroom, 500, 500);
+    }
+
+    garden(){
+        background(garden, 500, 500);
+    }
+
+    washroom(){
+        background(washroom, 500, 500);
+    }
 }
